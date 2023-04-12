@@ -35,10 +35,18 @@ $(function () {
             width: 300, // Desired width of the output image in pixels
             height: 300, // Desired height of the output image in pixels
         }).toDataURL();
+        // Set the src of the image element to the data URL of the cropped image
+        image.src = croppedImageDataURL;
+
+        // Download the cropped image
         const link = document.createElement("a");
         link.href = croppedImageDataURL;
         link.download = "cropped-image.png";
         link.click();
+
+        // Destroy the cropper instance and remove any cropping UI
+        cropper.destroy();
+        cropper = null;
       } else {
         alert("Please upload an image and adjust the crop area before cropping.");
       }
