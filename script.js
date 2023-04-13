@@ -35,8 +35,8 @@ $(function () {
           cropper = new Cropper(image, {
             aspectRatio: 1,
             viewMode: 1,
-            minCropBoxWidth: 300, // Minimum width of the crop box in pixels
-            minCropBoxHeight: 300, // Minimum height of the crop box in pixels
+            minCropBoxWidth: 300,
+            minCropBoxHeight: 300,
           });
         });
       };
@@ -47,14 +47,17 @@ $(function () {
   cropButton.addEventListener("click", () => {
     if (cropper) {
       const croppedImageDataURL = cropper.getCroppedCanvas({
-        width: 300, // Desired width of the output image in pixels
-        height: 300, // Desired height of the output image in pixels
+        width: 300,
+        height: 300,
       }).toDataURL();
       
       // Set the src of the image element to the data URL of the cropped image
       image.src = croppedImageDataURL;
 
-      // Download the cropped image
+      // Store the cropped image data URL in the hidden input element
+      document.getElementById("croppedImage").value = croppedImageDataURL;
+
+      // Download the cropped image (optional)
       const link = document.createElement("a");
       link.href = croppedImageDataURL;
       link.download = "cropped-image.png";
